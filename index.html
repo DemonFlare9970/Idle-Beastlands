@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idle Beastlands - Breed beasts. Harvest magic. Build your fantasy empire.</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header with resources -->
+        <header class="game-header">
+            <div class="logo">
+                <h1>🏰 Idle Beastlands</h1>
+                <p class="tagline">Breed beasts. Harvest magic. Build your empire.</p>
+            </div>
+            <div class="resources">
+                <div class="resource" id="mana-display">
+                    <span class="icon">✨</span>
+                    <span class="value" id="mana-value">0</span>
+                    <span class="label">Mana</span>
+                </div>
+                <div class="resource" id="essence-display">
+                    <span class="icon">🔮</span>
+                    <span class="value" id="essence-value">0</span>
+                    <span class="label">Essence</span>
+                </div>
+                <div class="resource" id="eggs-display">
+                    <span class="icon">🥚</span>
+                    <span class="value" id="eggs-value">0</span>
+                    <span class="label">Eggs</span>
+                </div>
+                <div class="resource" id="crystals-display">
+                    <span class="icon">💎</span>
+                    <span class="value" id="crystals-value">10</span>
+                    <span class="label">Crystals</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main game area -->
+        <main class="game-main">
+            <!-- Habitat selection tabs -->
+            <nav class="habitat-tabs">
+                <button class="tab-button active" data-habitat="forest">🌲 Forest</button>
+                <button class="tab-button" data-habitat="volcano">🌋 Volcano</button>
+                <button class="tab-button" data-habitat="glacier">❄️ Glacier</button>
+            </nav>
+
+            <!-- Creature display area -->
+            <section class="creature-area" id="creature-area">
+                <div class="habitat-info">
+                    <h2 id="habitat-name">Enchanted Forest</h2>
+                    <p id="habitat-description">A mystical woodland where unicorns and fairies thrive.</p>
+                </div>
+                
+                <div class="creature-grid" id="creature-grid">
+                    <!-- Creatures will be dynamically generated here -->
+                </div>
+
+                <div class="habitat-upgrades">
+                    <h3>🏠 Habitat Upgrades</h3>
+                    <div class="upgrade-buttons">
+                        <button class="upgrade-btn" id="habitat-upgrade">
+                            <span class="upgrade-icon">🏡</span>
+                            <span class="upgrade-name">Improve Habitat</span>
+                            <span class="upgrade-cost">Cost: 100 ✨</span>
+                        </button>
+                        <button class="upgrade-btn" id="food-upgrade">
+                            <span class="upgrade-icon">🌿</span>
+                            <span class="upgrade-name">Premium Food</span>
+                            <span class="upgrade-cost">Cost: 250 ✨</span>
+                        </button>
+                        <button class="upgrade-btn" id="magic-upgrade">
+                            <span class="upgrade-icon">🔮</span>
+                            <span class="upgrade-name">Magic Aura</span>
+                            <span class="upgrade-cost">Cost: 500 ✨</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Side panel -->
+            <aside class="side-panel">
+                <!-- Breeding section -->
+                <section class="breeding-section">
+                    <h3>🧬 Breeding Lab</h3>
+                    <div class="breeding-slots">
+                        <div class="breed-slot" id="breed-slot-1">
+                            <div class="slot-content">
+                                <span class="slot-icon">➕</span>
+                                <span class="slot-text">Select Creature</span>
+                            </div>
+                        </div>
+                        <div class="breed-operator">×</div>
+                        <div class="breed-slot" id="breed-slot-2">
+                            <div class="slot-content">
+                                <span class="slot-icon">➕</span>
+                                <span class="slot-text">Select Creature</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="breed-button" id="breed-button" disabled>
+                        <span>🥚 Start Breeding</span>
+                        <span class="breed-cost">Cost: 50 ✨</span>
+                    </button>
+                    <div class="breeding-info">
+                        <p>Combine two creatures to discover new hybrids!</p>
+                    </div>
+                </section>
+
+                <!-- Achievements -->
+                <section class="achievements-section">
+                    <h3>🏆 Achievements</h3>
+                    <div class="achievement-list" id="achievement-list">
+                        <!-- Achievements will be dynamically generated -->
+                    </div>
+                </section>
+
+                <!-- Magic Surge Event -->
+                <section class="event-section" id="magic-surge" style="display: none;">
+                    <h3>⚡ Magic Surge Event!</h3>
+                    <p>Double mana production for limited time!</p>
+                    <div class="event-timer" id="surge-timer">05:00</div>
+                    <button class="event-activate" id="activate-surge">Activate Now!</button>
+                </section>
+            </aside>
+        </main>
+
+        <!-- Bottom navigation/actions -->
+        <footer class="game-footer">
+            <button class="action-btn" id="shop-btn">
+                <span class="btn-icon">🛒</span>
+                <span>Shop</span>
+            </button>
+            <button class="action-btn" id="collection-btn">
+                <span class="btn-icon">📚</span>
+                <span>Collection</span>
+            </button>
+            <button class="action-btn" id="settings-btn">
+                <span class="btn-icon">⚙️</span>
+                <span>Settings</span>
+            </button>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="creature-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-creature-name">Creature Name</h2>
+            <div class="modal-creature-display">
+                <div class="creature-image" id="modal-creature-image">🦄</div>
+                <div class="creature-stats">
+                    <p><strong>Age:</strong> <span id="modal-creature-age">Baby</span></p>
+                    <p><strong>Tier:</strong> <span id="modal-creature-tier">Common</span></p>
+                    <p><strong>Mana/sec:</strong> <span id="modal-creature-production">1.0</span></p>
+                    <p><strong>Next Evolution:</strong> <span id="modal-creature-evolution">Adult (2h)</span></p>
+                </div>
+            </div>
+            <div class="creature-actions">
+                <button class="action-button feed-btn">🍃 Feed (+50% for 1h)</button>
+                <button class="action-button play-btn">🎾 Play (+25% happiness)</button>
+                <button class="action-button select-breed-btn">🧬 Select for Breeding</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/gameData.js"></script>
+    <script src="js/gameState.js"></script>
+    <script src="js/creatures.js"></script>
+    <script src="js/breeding.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
