@@ -3,6 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Idle Beastlands - Breed magical creatures, harvest mana, and build your fantasy empire in this engaging idle game!">
+    <meta name="keywords" content="idle game, creature breeding, fantasy, magical creatures, incremental game">
+    <meta name="author" content="Idle Beastlands">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/idle-beastlands/">
+    <meta property="og:title" content="Idle Beastlands - Breed beasts. Harvest magic. Build your empire.">
+    <meta property="og:description" content="A magical creature farming and breeding idle game featuring unicorns, phoenixes, dragons, and more!">
+    <meta property="og:image" content="https://yourusername.github.io/idle-beastlands/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourusername.github.io/idle-beastlands/">
+    <meta property="twitter:title" content="Idle Beastlands - Magical Creature Farming">
+    <meta property="twitter:description" content="Breed magical creatures, harvest mana, and build your fantasy empire!">
+    <meta property="twitter:image" content="https://yourusername.github.io/idle-beastlands/preview.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏰</text></svg>">
+    
     <title>Idle Beastlands - Breed beasts. Harvest magic. Build your fantasy empire.</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +35,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="game-container">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">🏰</div>
+            <h1>Idle Beastlands</h1>
+            <p>Loading your magical empire...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container" style="display: none;">
         <!-- Header with resources -->
         <header class="game-header">
             <div class="logo">
@@ -176,5 +213,36 @@
     <script src="js/breeding.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/game.js"></script>
+    
+    <!-- Loading Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const gameContainer = document.getElementById('game-container');
+            const progressBar = document.querySelector('.loading-progress');
+            
+            let progress = 0;
+            const loadingInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(loadingInterval);
+                    
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            gameContainer.style.display = 'flex';
+                            gameContainer.style.opacity = '0';
+                            setTimeout(() => {
+                                gameContainer.style.opacity = '1';
+                            }, 50);
+                        }, 300);
+                    }, 500);
+                }
+                progressBar.style.width = progress + '%';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
